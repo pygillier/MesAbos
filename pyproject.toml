@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "mesabos"
+version = "0.1.0"
+description = "Small subscriptions tracker, a pythonic way"
+authors = ["Pierre-Yves Gillier <github@pygillier.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.0"
+uvicorn = "^0.26.0"
+pydantic-settings = "^2.1.0"
+pyjwt = "^2.8.0"
+sqlalchemy = {extras = ["pymysql"], version = "^2.0.25"}
+alembic = "^1.13.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.12.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
