@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Small subscriptions tracker, a pythonic way"
 authors = ["Pierre-Yves Gillier <github@pygillier.me>"]
 readme = "README.md"
+license = "MIT"
+repository = "https://github.com/pygillier/MesAbos"
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
