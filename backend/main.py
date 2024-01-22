@@ -1,13 +1,32 @@
 import uvicorn
+import logging
+import sys
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from backend.config import settings
 from backend.routers.main import api_router
 from backend import __version__
-from backend.db import models, database
+from backend.database import sessionmanager
+
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG if settings.debug else logging.INFO)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Function that handles startup and shutdown events.
+    To understand more, read https://fastapi.tiangolo.com/advanced/events/
+    """
+    yield
+    if sessionmanager._engine is not None:
+        # Close the DB connection
+        await sessionmanager.close()
 
 
 def get_application() -> FastAPI:
     application = FastAPI(
+        lifespan=lifespan,
         title=settings.app_name,
         docs_url="/apidoc",
         redoc_url=None,
@@ -23,13 +42,6 @@ def get_application() -> FastAPI:
 
 # Get app from factory
 app = get_application()
-
-
-# DB init on startup
-@app.on_event("startup")
-def init_db():
-    models.Base.metadata.create_all(bind=database.engine)
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8086)

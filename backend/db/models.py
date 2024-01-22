@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float, Date
-
+from fastapi_users.db import SQLAlchemyBaseUserTableUUID
 from backend.db.database import Base
 from backend.db.schemas import Status, BillingMode
 
@@ -15,3 +15,7 @@ class Subscription(Base):
     renewal_date = Column(Date)
     payment = Column(String(12))
     tags = Column(String(1024))
+
+
+class User(SQLAlchemyBaseUserTableUUID):
+    pass

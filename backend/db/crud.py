@@ -1,12 +1,14 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi_users.db import SQLAlchemyUserDatabase
 from . import models, schemas
 
 
-def get_subscription(db: Session, subscription_id: int):
-    return db.query(models.Subscription).get(subscription_id)
+def get_subscription(session: AsyncSession, subscription_id: int):
+    return session.get(models.Subscription, subscription_id)
 
 
-def get_subscriptions(db: Session, offset: int = 0, limit: int = 100):
+async def get_subscriptions(session: AsyncSession, offset: int = 0, limit: int = 100):
     return db.query(models.Subscription).offset(offset).limit(limit).all()
 
 
@@ -26,3 +28,7 @@ def delete_subscription(db: Session, subscription_id: int):
         return True
     else:
         return False
+
+# Users
+async def get_user_db(db: Session):
+    yield SQLAlchemyUserDatabase(session=db, user_table=models.User)
