@@ -11,6 +11,8 @@ repository = "https://github.com/pygillier/MesAbos"
 [tool.poetry.dependencies]
 python = "^3.12"
 flask = "^3.0.1"
+doppler-sdk = "^1.2.1"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"
