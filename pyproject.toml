@@ -10,16 +10,7 @@ repository = "https://github.com/pygillier/MesAbos"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.109.0"
-uvicorn = "^0.26.0"
-pydantic-settings = "^2.1.0"
-pyjwt = "^2.8.0"
-sqlalchemy = {extras = ["asyncmy"], version = "^2.0.25"}
-alembic = "^1.13.1"
-fastapi-users = {extras = ["sqlalchemy"], version = "^12.1.2"}
-setuptools = "^69.0.3"
-asyncmy = "^0.2.9"
-
+flask = "^3.0.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"
